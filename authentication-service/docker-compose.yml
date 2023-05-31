@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  auth-app:
+    image: auth-app
+    build: .
+    ports:
+      - 8082:8080
+    depends_on:
+      - mysqldb
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_PORT: 3306
+
+  mysqldb:
+      image: "mysql:5.7"
+      restart: always
+      ports:
+        - 3306:3306
+      environment:
+        MYSQL_DATABASE: jwt_security
+        MYSQL_USER: test
+        MYSQL_PASSWORD: password
+        MYSQL_ROOT_PASSWORD: password

@@ -1,6 +1,7 @@
 package com.crimewatch.authenticationservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,9 +26,20 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @GetMapping("/test")
+    public String test(){
+        return "Message sent!";
+    }
     @PostMapping("/register")
-    public String addNewUser(@RequestBody User user) {
-        return authService.saveUser(user);
+    public ResponseEntity<String> addNewUser(@RequestBody User user) {
+        switch (authService.saveUser(user)) {
+            case 200:
+                return ResponseEntity.status(200).body("User registered successfully");
+            case 409:
+                return ResponseEntity.status(409).body("Username already exists");
+            default:
+                return ResponseEntity.status(404).body("Not found");
+        }
     }
 
     @PostMapping("/generatetoken")

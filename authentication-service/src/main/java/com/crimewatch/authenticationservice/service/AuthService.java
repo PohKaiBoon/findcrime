@@ -9,7 +9,7 @@ import com.crimewatch.authenticationservice.repository.UserRepository;
 
 @Service
 public class AuthService {
-    
+
     @Autowired
     private UserRepository repository;
 
@@ -19,10 +19,15 @@ public class AuthService {
     @Autowired
     private JWTService jwtService;
 
-    public String saveUser(User crendentials) {
-        crendentials.setPassword(passwordEncoder.encode(crendentials.getPassword()));
-        repository.save(crendentials);
-        return "User successfully added to the system";
+    public int saveUser(User crendentials) {
+
+        if (!checkIfUserExist(crendentials.getUsername())) {
+            return 409;
+        } else {
+            crendentials.setPassword(passwordEncoder.encode(crendentials.getPassword()));
+            repository.save(crendentials);
+            return 200;
+        }
     }
 
     public String generateJWTtoken(String username) {
@@ -31,6 +36,13 @@ public class AuthService {
 
     public void validateJWTtoken(String token) {
         jwtService.validateToken(token);
+    }
+
+    public boolean checkIfUserExist(String username) {
+        System.out.println("New user: " + username);
+        System.out.println(repository.findByUsername(username).isEmpty());
+        return repository.findByUsername(username).isEmpty();
+        // return repository.findByUsername(username) != null ? true : false;
     }
 
 }
