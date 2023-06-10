@@ -1,4 +1,4 @@
-package com.crimewatch.authenticationservice;
+package com.crimewatch.incidentservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,11 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AuthenticationServiceApplication {
+public class IncidentServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthenticationServiceApplication.class, args);
-		System.out.println("Version 3");
+		SpringApplication.run(IncidentServiceApplication.class, args);
 	}
 
 }
