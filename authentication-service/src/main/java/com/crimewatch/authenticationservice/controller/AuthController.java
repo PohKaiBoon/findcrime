@@ -13,7 +13,6 @@ import com.crimewatch.authenticationservice.service.AuthService;
 
 @RequestMapping("/auth")
 @RestController
-@CrossOrigin
 public class AuthController {
 
     @Autowired

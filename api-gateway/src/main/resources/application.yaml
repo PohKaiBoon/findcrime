@@ -11,10 +11,12 @@ spring:
           uri: lb://incident-service
           predicates:
             - Path=/incident/**
+          filters:
+            - AuthenticationFilter
         - id: authentication-service
           uri: lb://authentication-service
           predicates:
             - Path=/auth/**
   config:
-    import: configserver:http://localhost:9196
+    import: configserver:http://${CONFIG_SERVER_URL:localhost}:9196
 

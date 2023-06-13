@@ -1,3 +1,9 @@
 FROM openjdk:17
-ADD target/*.jar authentication-service-0.0.3.jar
-ENTRYPOINT [ "java","-jar","authentication-service-0.0.3.jar" ]
+
+ARG JAR_FILE=target/*.jar
+
+COPY ${JAR_FILE} authentication-service.jar
+
+ENTRYPOINT ["java", "-jar", "/authentication-service.jar"]
+
+EXPOSE 8083
