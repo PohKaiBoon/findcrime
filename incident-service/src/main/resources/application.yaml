@@ -13,4 +13,6 @@ spring:
     name: incident-service
   config:
     import: configserver:http://${CONFIG_SERVER_URL:localhost}:9196
+  rabbitmq:
+    addresses: localhost:5672
 

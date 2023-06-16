@@ -22,7 +22,7 @@ public class IncidentController {
         return "Can connect!";
     }
     @PostMapping
-    public ResponseEntity<String> newIncident(@RequestBody IncidentRequest incidentRequest) {
+    public ResponseEntity<String> newIncident(IncidentRequest incidentRequest) {
 
         long incidentID = incidentService.addIncident(incidentRequest);
         return new ResponseEntity<>("Incident created, ID: "+incidentID, HttpStatus.CREATED);
