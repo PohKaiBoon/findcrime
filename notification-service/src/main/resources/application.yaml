@@ -1,0 +1,9 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: notification-service
+  config:
+    import: configserver:http://${CONFIG_SERVER_URL:localhost}:9196
+
+

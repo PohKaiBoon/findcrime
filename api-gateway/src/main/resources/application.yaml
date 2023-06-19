@@ -17,6 +17,10 @@ spring:
           uri: lb://authentication-service
           predicates:
             - Path=/auth/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/**
   config:
     import: configserver:http://${CONFIG_SERVER_URL:localhost}:9196
 
